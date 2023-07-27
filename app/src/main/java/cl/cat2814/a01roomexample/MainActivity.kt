@@ -7,11 +7,11 @@ class MainActivity : AppCompatActivity() {
     /*
     [x] Navigation
     [x] 1 fragment agregar elementos
-    [] Interface
+    [X] UI
     [] Room
-        [] DAO
-        [] BD
-        [] Entity
+        [X] Entity
+        [X] DAO
+        [X] BD
     [] 1 fragment listado
     [] RV
 
