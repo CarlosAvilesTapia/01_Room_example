@@ -9,7 +9,4 @@ data class Task(
 ){
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
-
 }
-
-

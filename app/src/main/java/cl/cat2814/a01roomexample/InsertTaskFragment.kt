@@ -27,6 +27,8 @@ class InsertTaskFragment : Fragment() {
 
         initListener()
 
+        loadTasks()
+
         return binding.root
     }
 
@@ -41,5 +43,14 @@ class InsertTaskFragment : Fragment() {
         val taskDao = TaskDatabase.getDatabase(requireContext()).getTaskDao()
         val task = Task(taskText)
         GlobalScope.launch { taskDao.insertTask(task) }
+    }
+
+    private fun loadTasks() {
+        val taskDao = TaskDatabase.getDatabase(requireContext()).getTaskDao()
+        GlobalScope.launch {
+            val tasks = taskDao.getTasks()
+            val tasksAsText = tasks.joinToString("\n") { it.name }
+            binding.tvTaskList.text = tasksAsText
+        }
     }
 }
