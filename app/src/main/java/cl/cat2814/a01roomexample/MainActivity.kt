@@ -5,14 +5,13 @@ import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
     /*
-    [] Navigation
-    [] 1 fragment agregar elementos
+    [x] Navigation
+    [x] 1 fragment agregar elementos
     [] Interface
     [] Room
         [] DAO
         [] BD
         [] Entity
-
     [] 1 fragment listado
     [] RV
 
