@@ -12,24 +12,30 @@ import kotlinx.coroutines.launch
 class InsertTaskFragment : Fragment() {
 
     lateinit var binding: FragmentInsertTaskBinding
+    lateinit var repository: Repository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         binding = FragmentInsertTaskBinding.inflate(layoutInflater, container, false)
+
+        initRepository()
 
         initListener()
 
         loadTasks()
 
         return binding.root
+    }
+
+    private fun initRepository() {
+        repository = Repository(TaskDatabase.getDatabase(requireContext()).getTaskDao())
     }
 
     private fun initListener() {
@@ -40,16 +46,13 @@ class InsertTaskFragment : Fragment() {
     }
 
     private fun saveTask(taskText: String) {
-        val taskDao = TaskDatabase.getDatabase(requireContext()).getTaskDao()
         val task = Task(taskText)
-        GlobalScope.launch { taskDao.insertTask(task) }
+        GlobalScope.launch { repository.insertTask(task) }
     }
 
     private fun loadTasks() {
-        val taskDao = TaskDatabase.getDatabase(requireContext()).getTaskDao()
-        GlobalScope.launch {
-            val tasks = taskDao.getTasks()
-            val tasksAsText = tasks.joinToString("\n") { it.name }
+        repository.getTasks().observe(requireActivity()) {
+            val tasksAsText = it.joinToString("\n") { it.name }
             binding.tvTaskList.text = tasksAsText
         }
     }

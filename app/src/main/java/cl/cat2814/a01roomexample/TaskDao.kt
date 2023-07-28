@@ -1,5 +1,6 @@
 package cl.cat2814.a01roomexample
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -11,5 +12,5 @@ interface TaskDao {
 
     @Query("SELECT * FROM task_table ORDER BY id ASC")
 
-    fun getTasks(): List<Task>
+    fun getTasks(): LiveData<List<Task>>
 }
