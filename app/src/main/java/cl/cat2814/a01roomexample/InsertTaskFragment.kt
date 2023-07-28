@@ -34,8 +34,6 @@ class InsertTaskFragment : Fragment() {
         return binding.root
     }
 
-
-
     private fun initListener() {
         binding.btSaveTask.setOnClickListener {
             val task = binding.etInsertTask.text.toString()
